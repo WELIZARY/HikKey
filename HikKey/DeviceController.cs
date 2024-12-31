@@ -1,4 +1,3 @@
-//DeviceController.cs
 using System;
 using System.Runtime.InteropServices;
 

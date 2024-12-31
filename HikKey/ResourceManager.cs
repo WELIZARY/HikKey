@@ -1,4 +1,4 @@
-// ResourceManager.cs
+using System;
 
 namespace HikKey;
 

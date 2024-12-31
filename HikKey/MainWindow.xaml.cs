@@ -1,12 +1,11 @@
-﻿//MainWindows.xaml.cs
-using System;
+﻿using System;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows; 
-using System.Windows.Forms; // Импортируем из Windows Forms
+using System.Windows.Forms; 
 using WindowsInput;
-using Clipboard = System.Windows.Clipboard; // Указываем явное использование WPF Clipboard
+using Clipboard = System.Windows.Clipboard; 
 
 namespace HikKey
 {
@@ -15,14 +14,14 @@ namespace HikKey
         private int _userId = -1;
         private bool _isDeviceConnected = false;
         private readonly InputSimulator _inputSimulator = new InputSimulator();
-        private CancellationTokenSource _emulationTokenSource; // Для управления отменой эмуляции
-        private NotifyIcon _trayIcon; // Для работы с системным треем
+        private CancellationTokenSource _emulationTokenSource; 
+        private NotifyIcon _trayIcon; 
 
         public MainWindow()
         {
             InitializeComponent();
             InitializeProgram();
-            InitializeTrayIcon(); // Инициализация иконки в трее
+            InitializeTrayIcon(); 
             this.ResizeMode = ResizeMode.CanMinimize;
             this.StateChanged += MainWindow_StateChanged;
         }
@@ -58,7 +57,7 @@ namespace HikKey
         {
             _trayIcon = new NotifyIcon
             {
-                Icon = new System.Drawing.Icon("icon.ico"), // Укажите свой путь к иконке
+                Icon = new System.Drawing.Icon("icon.ico"), 
                 Visible = false,
             };
 
@@ -235,7 +234,7 @@ private async Task StartKeyboardEmulation()
 
     try
     {
-        await Task.Run(async () =>  // Запуск задачи в фоновом потоке
+        await Task.Run(async () =>  
         {
             while (!token.IsCancellationRequested)
             {
@@ -248,7 +247,7 @@ private async Task StartKeyboardEmulation()
                 {
                     string rawSerialNumber = cardInfo.SerialNumber.Replace("-", "");
                     
-                    // Используем Dispatcher для доступа к элементам управления из другого потока
+                    
                     Dispatcher.Invoke(() =>
                     {
                         OutputTextBox.Text += $"UID: {rawSerialNumber}\n";
@@ -258,7 +257,7 @@ private async Task StartKeyboardEmulation()
                         //OutputTextBox.Text += "Серийный номер вставлен в активное окно.\n";
                     });
 
-                    // Активация бипера и светодиода при успешном считывании карты
+                    
                     bool controlResult = deviceController.ControlBeepAndLed(beepType: 3, beepCount: 1, ledType: 3, ledCount: 1);
                     if (controlResult)
                     {

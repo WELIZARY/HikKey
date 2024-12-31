@@ -1,5 +1,4 @@
-﻿//CardInfo.cs
-namespace HikKey;
+﻿namespace HikKey;
 
 public class CardInfo
 {

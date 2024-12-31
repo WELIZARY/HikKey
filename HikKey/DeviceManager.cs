@@ -1,5 +1,4 @@
-//DeviceManager.cs
-
+using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -88,13 +87,13 @@ public static class DeviceManager
         return userId;
     }
 
-    // Новый метод для выполнения только выхода
+
     public static bool Logout(long userId)
     {
         return USB_SDK_Logout((int)userId);
     }
 
-    // Оставляем метод для выполнения выхода и очистки
+
     public static void LogoutAndCleanup(long userId)
     {
         Console.WriteLine("Попытка выхода из системы...");
